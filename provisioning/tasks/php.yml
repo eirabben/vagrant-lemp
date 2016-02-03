@@ -1,0 +1,13 @@
+---
+- name: install php
+  apt: name={{ item }} state=present
+  with_items:
+    - php5-fpm
+    - php5-mysql
+
+- name: copy php configuration
+  template:
+    src=php.ini.j2
+    dest=/etc/php5/fpm/php.ini
+  notify:
+    - restart php5-fpm

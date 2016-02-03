@@ -1,0 +1,6 @@
+---
+- name: install mysql
+  apt: name=mysql-server state=present
+
+- name: install mysql-database
+  shell: mysql_install_db

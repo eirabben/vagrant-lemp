@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    document_root: /vagrant/www
+  handlers:
+    - name: restart nginx
+      service: name=nginx state=restarted
+    - name: restart php5-fpm
+      service: name=php5-fpm state=restarted
+  tasks:
+    - name: update apt cache
+      apt: update_cache=yes
+    - include: tasks/common.yml
+    - include: tasks/nginx.yml
+    - include: tasks/mysql.yml
+    - include: tasks/php.yml
