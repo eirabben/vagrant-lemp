@@ -1,6 +1,6 @@
 ---
-- name: install mysql
+- name: Ensure MySQL is installed.
   apt: name=mysql-server state=present
 
-- name: install mysql-database
+- name: Run MySQL database installer.
   shell: mysql_install_db

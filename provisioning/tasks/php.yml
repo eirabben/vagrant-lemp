@@ -1,13 +1,18 @@
 ---
-- name: install php
+- name: Ensure PHP packages are installed.
   apt: name={{ item }} state=present
   with_items:
     - php5-fpm
     - php5-mysql
+    - php5-mcrypt
+    - php5-cli
 
-- name: copy php configuration
+- name: Copy new FPM configuration.
   template:
     src=php.ini.j2
     dest=/etc/php5/fpm/php.ini
   notify:
     - restart php5-fpm
+
+- name: Enable PHP Mcrypt mod.
+  shell: php5enmod mcrypt

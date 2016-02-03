@@ -1,6 +1,6 @@
 ---
-- name: install git
-  apt: name=git state=present
-
-- name: install vim
-  apt: name=vim state=present
+- name: Ensure common packages are installed.
+  apt: name={{ item }} state=present
+  with_items:
+    - git
+    - vim
