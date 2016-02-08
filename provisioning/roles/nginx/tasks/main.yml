@@ -2,9 +2,16 @@
 - name: Ensure Nginx is installed.
   apt: name=nginx state=present
 
+- name: Copy new config file.
+  template:
+    src=nginx.conf.j2
+    dest=/etc/nginx/nginx.conf
+  notify:
+    - restart nginx
+
 - name: Copy new virtual hosts file.
   template:
-    src=nginx-virtual-host.j2
+    src=vagrant.j2
     dest=/etc/nginx/sites-available/vagrant
 
 - name: Disable default virtual hosts file.
